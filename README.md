@@ -127,7 +127,15 @@ The **Decision Tree Classifier** was the best-performing model because:
 - **Lighter payloads had a higher success rate** than heavier payloads.  
 
 ### **9. Best Predictive Model**  
-- **Decision Tree Classifier** was the best model with **0.8889 accuracy** and no false negatives.  
+- **Decision Tree Classifier** was the best model with **0.8889 accuracy** and no false negatives.
+
+## **Future Improvements**  
+This project provides a strong foundation for predicting Falcon 9 first-stage landings. Potential future enhancements include:  
+
+- **Model Optimization**: Exploring deep learning techniques such as neural networks to improve prediction accuracy.  
+- **Feature Engineering**: Incorporating additional factors like weather conditions, wind speed, and launch trajectory data.  
+- **Real-Time Predictions**: Developing a live dashboard that integrates new SpaceX launch data for continuous model updates.  
+- **Broader Application**: Extending the model to other rocket types, including Falcon Heavy and Starship, for wider applicability.  
 
 ## **Conclusion**  
 This project demonstrates how machine learning can predict Falcon 9 first-stage landings using historical launch data. **The Decision Tree model provided the highest accuracy** and identified key launch success patterns.  
