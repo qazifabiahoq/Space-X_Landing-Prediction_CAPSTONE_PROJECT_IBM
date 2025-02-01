@@ -124,4 +124,13 @@ The **Decision Tree Classifier** was the best-performing model because:
 ## **Conclusion**  
 This project demonstrates how machine learning can predict Falcon 9 first-stage landings using historical launch data. **The Decision Tree model provided the highest accuracy** and identified key launch success patterns.  
 
+## **Acknowledgment**  
+This project is part of the **IBM Data Science Capstone Project**, assigned as part of the **IBM Data Science Professional Certificate** course on **Coursera**.  
+
+The project task and outline were provided by **IBM**, while the implementation and completion were independently carried out.  
+
+## **Author**  
+**Qazi Fabia Hoq**  
+
+
 🚀 **For a more detailed analysis, check the full report in**: **"report.pdf" (located in the "report" folder of this repository).**  
