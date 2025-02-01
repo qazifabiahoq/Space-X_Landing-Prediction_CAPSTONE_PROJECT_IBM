@@ -7,6 +7,14 @@ This project focuses on predicting whether the first stage of a Falcon 9 rocket 
 
 The full report detailing all findings, methodologies, and results is available in the **"report.pdf"** file within the **"report"** folder of this repository.  
 
+## **Who This Project Is For?**  
+This project is valuable for **aerospace companies, government agencies, and researchers** involved in space exploration and rocket launch cost optimization.  
+
+- **Aerospace Industry**: Companies like SpaceX, Blue Origin, and Rocket Lab can use similar predictive models to enhance rocket reusability, reducing costs.  
+- **Government Agencies**: Organizations such as **NASA and national space programs** can benefit from predictive analysis to improve mission planning and budgeting.  
+- **Researchers & Data Scientists**: Those studying machine learning applications in aerospace can gain insights into how data-driven methods enhance launch success predictions.  
+- **Investors & Policymakers**: Understanding cost efficiencies in reusable rockets can guide funding and regulatory decisions for commercial spaceflight.  
+
 ## **Data Collection**  
 
 ### **1. SpaceX API**  
