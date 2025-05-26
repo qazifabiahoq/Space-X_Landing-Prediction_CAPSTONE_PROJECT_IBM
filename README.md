@@ -1,152 +1,82 @@
-# **SpaceX Falcon 9 First Stage Landing Prediction**  
+# SpaceX Falcon 9 First Stage Landing Prediction
 
-## **Project Overview**  
-The commercial space industry is rapidly evolving, with companies striving to make space travel more cost-effective. SpaceX has revolutionized spaceflight by developing reusable rockets, significantly reducing launch costs. The Falcon 9 rocket, advertised at $62 million per launch, is much cheaper than competitors, mainly due to its reusable first stage.  
+## Project Overview
 
-This project focuses on predicting whether the first stage of a Falcon 9 rocket will successfully land, thereby determining launch costs. Instead of relying on rocket science, machine learning models are used to analyze public launch data and predict first-stage reuse.  
+The commercial space industry is rapidly evolving with the goal of reducing the high cost of space travel. SpaceX has pioneered reusable rocket technology, cutting launch costs significantly. This project aims to predict whether the first stage of the Falcon 9 rocket will successfully land, impacting overall launch expenses. Machine learning models analyze publicly available launch data to forecast first-stage landing outcomes, enabling cost optimization without relying on traditional rocket science methods.
 
-The full report detailing all findings, methodologies, and results is available in the **"report.pdf"** file within the **"report"** folder of this repository.  
+## Who Will Benefit and Why?
 
-## **Who This Project Is For?**  
-This project is valuable for **aerospace companies, government agencies, and researchers** involved in space exploration and rocket launch cost optimization.  
+This project benefits aerospace companies, government agencies, researchers, and investors by providing actionable insights into launch success prediction and cost management.
 
-- **Aerospace Industry**: Companies like SpaceX, Blue Origin, and Rocket Lab can use similar predictive models to enhance rocket reusability, reducing costs.  
-- **Government Agencies**: Organizations such as **NASA and national space programs** can benefit from predictive analysis to improve mission planning and budgeting.  
-- **Researchers & Data Scientists**: Those studying machine learning applications in aerospace can gain insights into how data-driven methods enhance launch success predictions.  
-- **Investors & Policymakers**: Understanding cost efficiencies in reusable rockets can guide funding and regulatory decisions for commercial spaceflight.  
+* **Aerospace Companies:** Improve rocket reusability strategies, reducing operational costs.
+* **Government Agencies:** Enhance mission planning and budget forecasting with predictive analytics.
+* **Researchers and Data Scientists:** Explore applications of machine learning in aerospace launch analysis.
+* **Investors and Policymakers:** Make informed decisions on funding and regulations based on reusable rocket efficiency.
 
-## **Data Collection**  
+## Data Source
 
-### **1. SpaceX API**  
-- Data was collected via a **GET request** to the SpaceX API.  
-- The API response was converted into a **Pandas DataFrame** using `.json_normalize()`.  
-- Data cleaning included handling missing values and standardizing formats.  
+The dataset combines SpaceX launch records obtained through the SpaceX REST API and additional launch data scraped from Wikipedia. This real-world dataset covers detailed Falcon 9 launch information, including flight numbers, payloads, launch sites, orbits, and landing outcomes.
 
-### **2. Web Scraping**  
-- **BeautifulSoup** was used to scrape Falcon 9 launch records from Wikipedia.  
-- The extracted HTML table data was parsed and structured into a Pandas DataFrame for further analysis.  
+## How the Project Was Executed
 
-## **Data Wrangling & Exploratory Data Analysis (EDA)**  
-- Launch sites were analyzed using `.value_counts()` to determine the number of launches per site.  
-- The frequency of each orbit type was examined.  
-- Mission outcomes were categorized into **landing success (1)** and **failure (0)** for machine learning.  
-- Results were exported as a **CSV file** for modeling.  
+* **Data Collection:** Retrieved launch data using SpaceX API and scraped Wikipedia with BeautifulSoup.
+* **Data Wrangling & EDA:** Cleaned data, classified mission outcomes (success/failure), and explored key attributes like launch sites and orbits.
+* **Visualization:** Created scatter plots and trend charts to understand relationships among payloads, launch sites, flight numbers, and success rates.
+* **SQL Analysis:** Stored data in SQLite; extracted insights such as total payload mass for NASA missions and dates of landmark landings.
+* **Geospatial Mapping:** Used Folium to map launch sites relative to infrastructure like railways, highways, coastlines, and cities for safety and logistics evaluation.
+* **Dashboard Development:** Built an interactive Plotly Dash dashboard to visualize launch success percentages and payload success relationships.
+* **Predictive Modeling:** Trained multiple classifiers (Logistic Regression, SVM, Decision Tree, KNN) with hyperparameter tuning via GridSearchCV.
 
-## **Data Visualization**  
-- Visualizations explored relationships between **flight numbers, launch sites, payloads, and success rates**.  
-- Scatter plots analyzed **payload mass vs. orbit type** and **flight number vs. launch site**.  
-- Yearly trends in launch success rates were also plotted.  
+## Key Findings
 
-## **SQL-Based EDA**  
-- The dataset was stored in a **SQLite database** and analyzed using SQLAlchemy.  
-- Key insights extracted:  
-  - **Total payload mass** carried by NASA (CRS) missions: **48,213 kg**.  
-  - **Average payload mass** for booster version **F9 v1.1**: **2,928.4 kg**.  
-  - **Date of first successful ground landing**: **July 22, 2018**.  
+**1. Which launch site is the most active and successful?**
 
-## **Geospatial Analysis**  
-- Mapped launch sites with **Folium** and classified them based on landing success.  
-- Calculated distances to key features:  
-  - **Railways**: CCAFS LC-40 is near NASA Railway, aiding equipment transport.  
-  - **Highways**: KSC LC-39A is close to Kennedy Parkway North for logistical efficiency.  
-  - **Coastlines**: KSC LC-39A and CCAFS LC-40 benefit from safe launch trajectories over the ocean.  
-  - **Cities**: Launch sites are strategically distant from urban areas for safety.  
+* CCAFS SLC-40 leads in activity with success rates rising alongside flight numbers.
 
-## **Plotly Dash Dashboard**  
-An interactive dashboard was developed using **Plotly Dash** to visualize:  
-- **Launch success percentages** across different sites.  
-  - **KSC LC-39A:** 49%  
-  - **CCAFS SLC-40:** 12.5%  
-  - **CCAFS LC-40:** 29.2%  
-  - **VAFB SLC-4E:** 16.7%  
-- **Scatter plots** showing payload mass vs. success rate.  
-- **KSC LC-39A** had the highest launch success rate (**76.9%** success, **23.1%** failure).  
-- **Low-weight payloads had a higher success rate** compared to heavier payloads.  
+**2. How does payload mass vary by launch site?**
 
-## **Machine Learning & Predictive Analysis**  
+* VAFB SLC 4E handles lighter payloads (up to 10,000 kg), whereas other sites support heavier loads.
 
-### **Model Training**  
-- Data was split into **training and testing sets**.  
-- Feature engineering and **GridSearchCV** were used for hyperparameter tuning.  
-- Multiple classification models were evaluated:  
-  - **Logistic Regression**  
-  - **Support Vector Machine (SVM)**  
-  - **Decision Tree Classifier**  
-  - **K-Nearest Neighbors (KNN)**  
+**3. Which orbits have the highest success rates?**
 
-### **Best Model: Decision Tree Classifier**  
-- **Accuracy:** **0.8889 (Highest among all models)**  
-- **Confusion Matrix Performance:**  
-  - **True Positives (Landed Correctly):** **12**  
-  - **True Negatives (Did Not Land Correctly):** **4**  
-  - **False Positives:** **2**  
-  - **False Negatives:** **0** (Indicating high accuracy in predicting successful landings)  
+* ES-L1, GEO, and HEO orbits achieved 100% success; GTO orbit had the lowest success (50%), and SO orbit recorded no successful landings.
 
-### **Model Comparison**  
-| Model | Accuracy | False Positives | False Negatives |  
-|--------|------------|----------------|----------------|  
-| **Logistic Regression** | **0.8333** | **0** | **3** |  
-| **SVM** | **0.8333** | **0** | **3** |  
-| **Decision Tree** | **0.8889** | **2** | **0** |  
-| **KNN** | **0.8333** | **0** | **3** |  
+**4. Does flight experience improve success rates by orbit?**
 
-The **Decision Tree Classifier** was the best-performing model because:  
-- It achieved the **highest accuracy (0.8889)**.  
-- It correctly predicted **all successful landings (0 false negatives)**.  
-- It outperformed Logistic Regression, SVM, and KNN.  
+* Yes, success rates increase with flight number for LEO orbits, but no clear pattern exists for GTO.
 
-## **Key Findings**  
+**5. Is payload mass linked to orbit success?**
 
-### **1. Flight Number vs. Launch Site**  
-- **CCAFS SLC-40 is the most active launch site** with increasing success as flight numbers rise.  
+* Heavier payloads have higher success in Polar, LEO, and ISS orbits; GTO orbit shows no clear correlation.
 
-### **2. Payload vs. Launch Site**  
-- **VAFB SLC 4E specializes in lighter payloads (≤10,000 kg)**, while other sites support heavier payloads.  
+**6. How has launch success evolved over time?**
 
-### **3. Success Rate vs. Orbit Type**  
-- **Highest success (100%)**: ES-L1, GEO, and HEO orbits.  
-- **Lowest success (50%)**: GTO orbit.  
-- **No successful missions**: SO orbit.  
+* SpaceX’s launch success has steadily improved since 2013, with marked gains between 2013 and 2020.
 
-### **4. Flight Number vs. Orbit Type**  
-- **LEO orbit success rate increases** with flight number.  
-- **GTO orbit shows no clear trend** in relation to flight number.  
+**7. What geospatial factors affect launch sites?**
 
-### **5. Payload vs. Orbit Type**  
-- **Polar, LEO, and ISS orbits favor heavier payloads** with higher success rates.  
-- **GTO orbit has no clear relationship between payload mass and success.**  
+* Sites are near key infrastructure (railways, highways, coastlines) yet maintain safe distances from populated areas.
 
-### **6. Yearly Launch Success Trend**  
-- **Steady improvement** in SpaceX launch success rates since **2013**, especially from **2013–2020**.  
+**8. Which site shows the highest success on the dashboard?**
 
-### **7. Geospatial Insights**  
-- Launch sites are positioned **close to key infrastructure** (railways, highways, coastlines) but maintain a **safe distance from urban areas**.  
+* KSC LC-39A stands out with a 76.9% launch success rate.
 
-### **8. Dashboard Insights**  
-- **KSC LC-39A had the highest launch success rate (76.9%)**.  
-- **Lighter payloads had a higher success rate** than heavier payloads.  
+**9. Which machine learning model performed best?**
 
-### **9. Best Predictive Model**  
-- **Decision Tree Classifier** was the best model with **0.8889 accuracy** and no false negatives.
+* Decision Tree Classifier achieved the highest accuracy (0.8889) with zero false negatives, outperforming Logistic Regression, SVM, and KNN.
 
-## **Future Improvements**  
-This project provides a strong foundation for predicting Falcon 9 first-stage landings. Potential future enhancements include:  
+## Conclusion
 
-- **Model Optimization**: Exploring deep learning techniques such as neural networks to improve prediction accuracy.  
-- **Feature Engineering**: Incorporating additional factors like weather conditions, wind speed, and launch trajectory data.  
-- **Real-Time Predictions**: Developing a live dashboard that integrates new SpaceX launch data for continuous model updates.  
-- **Broader Application**: Extending the model to other rocket types, including Falcon Heavy and Starship, for wider applicability.  
+Machine learning effectively predicts Falcon 9 first-stage landing success using launch data. The Decision Tree model provides robust accuracy and reveals key success patterns tied to launch sites, payloads, orbits, and experience. These insights offer valuable guidance for improving rocket reuse strategies and cost efficiency.
 
-## **Conclusion**  
-This project demonstrates how machine learning can predict Falcon 9 first-stage landings using historical launch data. **The Decision Tree model provided the highest accuracy** and identified key launch success patterns.  
+## Recommendations
 
-## **Acknowledgment**  
-This project is part of the **IBM Data Science Capstone Project**, assigned as part of the **IBM Data Science Professional Certificate** course on **Coursera**.  
+Future work may include integrating weather and trajectory data, exploring advanced modeling techniques like neural networks, enabling real-time prediction dashboards, and expanding analysis to other rocket types such as Falcon Heavy and Starship.
 
-The project task and outline were provided by **IBM**, while the implementation and completion were independently carried out.  
+## Acknowledgment
 
-## **Author**  
-**Qazi Fabia Hoq**  
+This project is part of the IBM Data Science Capstone Project within the IBM Data Science Professional Certificate on Coursera. The project framework and data were provided by IBM; implementation was conducted independently.
 
+## Author
 
-🚀 **For a more detailed analysis, check the full report in**: **"report.pdf" (located in the "report" folder of this repository).**  
+Qazi Fabia Hoq
